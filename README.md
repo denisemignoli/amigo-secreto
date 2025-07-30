@@ -1,6 +1,6 @@
 # Secret Friend (Amigo Secreto)
 
-🔗 [Live Demo on Vercel](https://amigo-secreto.vercel.app)
+🔗 [Live Demo on Vercel](https://amigo-secreto-snowy-phi.vercel.app/)
 
 ## Project Overview
 
