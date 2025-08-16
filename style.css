@@ -1,234 +1,265 @@
-:root {
-    --color-primary: #34495E;
-    --color-secondary: #FDEBD0;
-    --color-tertiary: #C4C4C4;
-    --color-button: #fe652b;
-    --color-button-hover: #e55720;
-    --color-text: #444444;
-    --color-white: #FFFFFF;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
-/* Estilos gerais */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --cor-bg: #FFFFFF;
+    --cor-bg-secundaria: #F5F5F5;
+    --cor-contorno: #ADADAD;
+    --cor-destaque: #FF4B00;
+    --cor-texto: #696464;
+    --cor-hover: #0dff00ca;
+    --fonte-principal: "Josefin Sans", sans-serif;
+    --fonte-secundária: "Inter", sans-serif;
 }
 
 body {
-    height: 100vh;
-    background-color: var(--color-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-}
-
-/* Banner */
-.header-banner {
-    flex: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 0 0;
-}
-
-/* Seção de entrada */
-.input-section {
-    flex: 60%;
-    background-color: var(--color-secondary);
-    border: 1px solid #000;
-    border-radius: 64px 64px 0 0;
+    background: var(--cor-bg);
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    width: 100%;
 }
 
-/* Títulos */
-.main-title {
-    font-size: 48px;
-    font-family: "Merriweather", serif;
-    font-weight: 900;
-    font-style: italic;
-    color: var(--color-white);
+h1 {
+    margin-top: 84px;
+    margin-bottom: 84px;
+    font-size: 2.10rem;
+    font-weight: 200;
+    font-style: normal;
+    font-family: var(--fonte-principal);
+    background: linear-gradient(to right, #372C28, #FFFFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 
-.section-title {
-    font-family: "Inter", serif;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin: 10px 0;
-    text-align: center;
+.game {
+    width: 38%;
+    margin: 0 auto;
 }
 
-/* Contêineres de entrada e botão */
-.input-wrapper {
+/* Area de Input */
+.input-area {
     display: flex;
     justify-content: center;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
+    gap: 16px;
+    width: 80%;
+    margin: 0 auto;
 }
 
-.input-name {
-    width: 100%;
-    padding: 10px 20px;
-    border: 1px solid #000;
-    border-radius: 25px 0 0 25px;
-    font-size: 16px;
+#nomeInput {
+    padding: 15px 18px;
+    font-family: var(--fonte-secundária);
+    font-size: 0.875rem;
+    background-color: var(--cor-bg-secundaria);
+    border-color: var(--cor-contorno);
+    border-width: 0.5px;
+    border-radius: 8px;
+    width: 19.43rem;
+    color: var(--cor-texto);
 }
 
-.button-container {
-    width: 300px;
-    justify-content: center;
-}
-
-/* Estilos de entrada de texto */
-.input-title {
-    flex: 1;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 2px solid #333;
-    border-right: none;
-    border-radius: 25px 0 0 25px;
-    font-family: "Merriweather", serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilos de botão */
-button {
-    padding: 15px 30px;
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    border: 2px solid #000;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+#addNomeBtn {
+    padding: 15px 18px;
+    background-color: var(--fonte-principal);
+    border-color: var(--cor-destaque);
+    border-width: 1px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--cor-destaque);
+    font-weight: bold;
     cursor: pointer;
 }
 
-.button-add {
-    border: none;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border-radius: 0 25px 25px 0;
-}
-
-.button-add:hover {
-    background-color: #000000dc;
-}
-
-/* Botão de sortear título */
-.button-draw {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px 40px;
-    color: var(--color-white);
-    background-color: var(--color-button);
-    font-size: 16px;
-    border: none;
-}
-
-.button-draw img {
-    margin-right: 40px;
-}
-
-.button-draw:hover {
-    background-color: var(--color-button-hover);
-}
-
-/* Estilo para o <ul> da lista de amigos */
-.name-list {
+/* Lista de nomes (container) */
+#listaAmigos {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 16px;
     justify-content: center;
-    padding: 10px 20px;
+    list-style: none;
+    padding: 0;
+    margin: 70px 0;
 }
 
-/* Cada nome como uma "tag" */
-.friend-item {
+/* Cada nome (chip) */
+.listaAmigos {
     display: flex;
     align-items: center;
-    background-color: var(--color-button);
-    border-radius: 50px;
-    padding: 6px 12px;
-    font-size: 16px;
-    font-family: "Inter", sans-serif;
-    color: #FFFFFF;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s, color 0.2s;
+    background: linear-gradient(to right, #EDEDED, #F8F8F8);
+    border-radius: 8px;
+    padding: 15px 21px;
+    font-size: 0.81rem;
+    font-family: var(--fonte-secundária);
+    color: var(--cor-texto);
+    gap: 8px;
 }
 
-.friend-item:hover {
-    background-color: var(--color-white);
-    color: #000000;
-}
-
-.friend-item span {
-    margin-right: 8px;
-}
-
-/* Botão de remover */
 .remove-btn {
     all: unset;
-    color: var(--color-primary);
-    font-size: 16px;
-    margin-left: 6px;
+    font-size: 0.81rem;
+    color: #696464;
     cursor: pointer;
     transition: transform 0.2s, color 0.2s;
-    line-height: 1;
+    font-family: var(--fonte-secundária);
+    font-weight: bold;
 }
 
 .remove-btn:hover {
-    color: #e50000;
+    color: var(--cor-destaque);
     transform: scale(1.2);
 }
 
-/* Resultado do sorteio */
-.section-result {
-    font-family: "Inter", serif;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin: 30px 0px 10px;
-    text-align: center;
+/* Area de Sorteio*/
+#sorteio-area {
+    width: 32%;
+    margin: auto;
+    margin-bottom: 70px;
 }
 
-ul {
-    list-style-type: none;
-    color: var(--color-text);
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    margin: 20px 0;
-}
-
-.result-list {
-    margin-top: 15px;
-    color: var(--color-white);
-    font-size: 22px;
+/* Botões */
+.sortearBtn {
+    padding: 15px 18px;
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+    border-width: 1px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--cor-bg);
     font-weight: bold;
-    text-align: center;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: 100%;
+    margin: auto;
+
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
-.friend-selected{
+.sortearBtn.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#reiniciarBtn {
+    padding: 15px 18px;
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+    border-width: 1px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--cor-bg);
+    font-weight: bold;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: 80%;
+    margin: auto;
+}
+
+#reiniciarBtn:hover:enabled {
+    background: var(--cor-hover);
+}
+
+.btns {
+    margin: 20px auto 25px auto;
     display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+#sortearBtn:hover:enabled {
+    background: var(--cor-hover);
+}
+
+#reiniciarBtn:hover:enabled {
+    background: var(--cor-hover);
+}
+
+/* Cards */
+
+.paper {
+    width: 100%;
+    height: 150px;
+    perspective: 800px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.paper_inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid #a37c1f;
+    border-radius: 15px;
+    background: #f5e6c4;
+}
+
+.paper.flipped .paper_inner {
+    transform: rotateY(180deg);
+}
+
+.paper_front,
+.paper_back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    background-color: #2f8741;
-    border-radius: 50px;
-    padding: 6px 24px;
-    font-size: 16px;
-    font-family: "Inter", sans-serif;
-    color: #FFFFFF;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s, color 0.2s;
+    font-size: 1.5rem;
+    padding: 20px;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.paper_front {
+    background: var(--cor-bg);
+    color: var(--cor-texto);
+    font-weight: bold;
+    box-shadow: inset 0 0 8px var(--cor-hover);
+}
+
+.paper_back {
+    background: var(--cor-destaque);
+    color: var(--cor-bg);
+    transform: rotateY(180deg);
+    box-shadow: inset 0 0 12px var(--cor-hover);
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .game {
+        width: 90%;
+    }
+
+    #nomeInput {
+        width: 100%;
+    }
+
+    .input-area {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #addNomeBtn {
+        width: 100%;
+    }
+
+    #listaAmigos {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .listaAmigos {
+        font-size: 0.8rem;
+        padding: 10px 14px;
+    }
 }

@@ -1,42 +1,65 @@
+// Elementos DOM
+const DOM = {
+    inputName: document.getElementById('nomeInput'),
+    addNomeBtn: document.getElementById('addNomeBtn'),
+    friendsList: document.getElementById('listaAmigos'),
+    paperCard: document.getElementById('paperCard'),
+    nameDisplay: document.getElementById('nomeAmigo'),
+    reiniciarBtn: document.getElementById('reiniciarBtn')
+};
+
 let friendList = [];
 
+// Valida e adiciona um novo amigo à lista
 function addFriend() {
-    let name = document.querySelector('input').value.trim();
-    if (name === '') {
+    let name = DOM.inputName.value.trim();
+    validateName(name);
+    friendList.push(name);
+    clearInput();
+    displayList();
+    console.log(friendList);
+}
+
+function validateName(name) {
+    if (!name) {
         alert('Por favor, informe um nome válido!');
-        return;
+        throw new Error('Por favor, informe um nome válido!');
+    }
+    if (name.length < 3) {
+        alert('O nome deve ter pelo menos 3 caracteres!');
+        throw new Error('O nome deve ter pelo menos 3 caracteres!');
     }
     if (friendList.includes(name)) {
         alert('Este nome já foi adicionado!');
-        clearInput();
-        return;
+        throw new Error('Este nome já foi adicionado!');
     }
-    friendList.push(name);
-    displayList();
-    clearInput();
-    console.log(friendList)
 }
 
+function clearInput() {
+    DOM.inputName.value = '';
+    DOM.inputName.focus();
+}
+
+
 function displayList() {
-    let ul = document.getElementById('friendList');
+    let ul = DOM.friendsList;
     ul.innerHTML = '';
 
-    friendList.forEach((friend, index) => {
+    for (let i = 0; i < friendList.length; i++) {
         let li = document.createElement('li');
-        li.className = 'friend-item';
-
-        let span = document.createElement('span');
-        span.textContent = friend;
+        li.textContent = friendList[i].toUpperCase();
+        li.className = 'listaAmigos';
 
         let removeBtn = document.createElement('button');
-        removeBtn.textContent = '✖';
+        removeBtn.textContent = 'x';
         removeBtn.className = 'remove-btn';
-        removeBtn.onclick = () => removeFriend(index);
+        removeBtn.onclick = () => removeFriend(i);
 
-        li.appendChild(span);
         li.appendChild(removeBtn);
         ul.appendChild(li);
-    });
+    }
+
+    updateSortearBtn();
 }
 
 function removeFriend(index) {
@@ -44,8 +67,28 @@ function removeFriend(index) {
     displayList();
 }
 
-function clearInput() {
-    document.querySelector('input').value = '';
+function updateSortearBtn() {
+    let sorteioArea = document.getElementById('sorteio-area');
+    let existingBtn = sorteioArea.querySelector('.sortearBtn');
+
+    if (friendList.length >= 2) {
+        if (!existingBtn) {
+            let btn = document.createElement('button');
+            btn.className = 'sortearBtn';
+            btn.textContent = 'Sortear';
+            sorteioArea.appendChild(btn);
+
+            setTimeout(() => {
+                btn.classList.add('show');
+            }, 50);
+
+            btn.addEventListener('click', pickRandomFriend);
+        }
+    } else {
+        if (existingBtn) {
+            existingBtn.remove();
+        }
+    }
 }
 
 function pickRandomFriend() {
@@ -53,17 +96,33 @@ function pickRandomFriend() {
         alert('É necessário pelo menos 2 participantes para realizar o sorteio!');
         return;
     }
-    let randomIndex = Math.floor(Math.random() * friendList.length);
-    let selectedFriend = friendList[randomIndex];
-
-    let paragrafo = document.getElementById('selectedFriend');
-    paragrafo.innerHTML = 'Seu amigo secreto é: ';
+    let randomFriend = Math.floor(Math.random() * friendList.length);
+    let selectedFriend = friendList[randomFriend];
     displaySelectedFriend(selectedFriend);
-    console.log(selectedFriend);
 }
 
 function displaySelectedFriend(selectedFriend) {
-    let result = document.getElementById('result');
-    result.innerHTML = selectedFriend;
-    result.className = 'friend-selected';
+    let card = DOM.paperCard;
+    let nomeDiv = DOM.nameDisplay;
+
+    nomeDiv.innerHTML = selectedFriend;
+    card.style.display = 'block';
+    card.classList.remove('flipped');
 }
+
+function flipCard() {
+    const card = DOM.paperCard;
+    card.classList.toggle('flipped');
+}
+
+function resetGame() {
+    friendList = [];
+    displayList();
+    const card = DOM.paperCard;
+    card.style.display = 'none';
+}
+
+// Liga os eventos aos botões
+DOM.addNomeBtn.addEventListener('click', addFriend);
+DOM.paperCard.addEventListener('click', flipCard);
+DOM.reiniciarBtn.addEventListener('click', resetGame);
