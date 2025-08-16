@@ -1,37 +1,40 @@
-// Elementos DOM
 const DOM = {
     inputName: document.getElementById('nomeInput'),
     addNomeBtn: document.getElementById('addNomeBtn'),
     friendsList: document.getElementById('listaAmigos'),
-    paperCard: document.getElementById('paperCard'),
-    nameDisplay: document.getElementById('nomeAmigo'),
-    reiniciarBtn: document.getElementById('reiniciarBtn')
+    reiniciarBtn: document.getElementById('reiniciarBtn'),
+    setupArea: document.getElementById('setup-area'),
+    resultadosContainer: document.getElementById('resultados-container'),
+    listaResultados: document.getElementById('lista-resultados'),
 };
 
 let friendList = [];
+let sorteioResultado = [];
 
-// Valida e adiciona um novo amigo à lista
 function addFriend() {
     let name = DOM.inputName.value.trim();
-    validateName(name);
-    friendList.push(name);
-    clearInput();
-    displayList();
-    console.log(friendList);
+    try {
+        validateName(name);
+        friendList.push(name);
+        clearInput();
+        displayList();
+    } catch (error) {
+        console.error(error.message);
+    }
 }
 
 function validateName(name) {
     if (!name) {
         alert('Por favor, informe um nome válido!');
-        throw new Error('Por favor, informe um nome válido!');
+        throw new Error('Nome inválido.');
     }
     if (name.length < 3) {
         alert('O nome deve ter pelo menos 3 caracteres!');
-        throw new Error('O nome deve ter pelo menos 3 caracteres!');
+        throw new Error('Nome muito curto.');
     }
     if (friendList.includes(name)) {
         alert('Este nome já foi adicionado!');
-        throw new Error('Este nome já foi adicionado!');
+        throw new Error('Nome duplicado.');
     }
 }
 
@@ -40,7 +43,6 @@ function clearInput() {
     DOM.inputName.focus();
 }
 
-
 function displayList() {
     let ul = DOM.friendsList;
     ul.innerHTML = '';
@@ -48,7 +50,7 @@ function displayList() {
     for (let i = 0; i < friendList.length; i++) {
         let li = document.createElement('li');
         li.textContent = friendList[i].toUpperCase();
-        li.className = 'listaAmigos';
+        li.className = 'chipAmigo';
 
         let removeBtn = document.createElement('button');
         removeBtn.textContent = 'x';
@@ -58,7 +60,6 @@ function displayList() {
         li.appendChild(removeBtn);
         ul.appendChild(li);
     }
-
     updateSortearBtn();
 }
 
@@ -82,7 +83,7 @@ function updateSortearBtn() {
                 btn.classList.add('show');
             }, 50);
 
-            btn.addEventListener('click', pickRandomFriend);
+            btn.addEventListener('click', realizarSorteio);
         }
     } else {
         if (existingBtn) {
@@ -91,38 +92,86 @@ function updateSortearBtn() {
     }
 }
 
-function pickRandomFriend() {
-    if (friendList.length < 2) {
-        alert('É necessário pelo menos 2 participantes para realizar o sorteio!');
-        return;
+function realizarSorteio() {
+    let shuffledFriends = [...friendList].sort(() => Math.random() - 0.5);
+    sorteioResultado = [];
+
+    for (let i = 0; i < shuffledFriends.length; i++) {
+        const giver = shuffledFriends[i];
+        const receiver = shuffledFriends[(i + 1) % shuffledFriends.length];
+        sorteioResultado.push({ giver, receiver });
     }
-    let randomFriend = Math.floor(Math.random() * friendList.length);
-    let selectedFriend = friendList[randomFriend];
-    displaySelectedFriend(selectedFriend);
+    
+    displayResults();
 }
 
-function displaySelectedFriend(selectedFriend) {
-    let card = DOM.paperCard;
-    let nomeDiv = DOM.nameDisplay;
+function displayResults() {
+    document.body.classList.add('results-active');
+    DOM.setupArea.style.display = 'none';
+    DOM.resultadosContainer.style.display = 'block';
+    DOM.reiniciarBtn.style.display = 'block';
+    DOM.listaResultados.innerHTML = '';
 
-    nomeDiv.innerHTML = selectedFriend;
-    card.style.display = 'block';
-    card.classList.remove('flipped');
+    sorteioResultado.forEach(par => {
+        // Cria o item da lista
+        const item = document.createElement('div');
+        item.className = 'resultado-item';
+
+        const nome = document.createElement('span');
+        nome.className = 'giver-name';
+        nome.textContent = par.giver.toUpperCase();
+
+        const arrow = document.createElement('span');
+        arrow.className = 'arrow';
+        arrow.textContent = '→';
+
+        // Cria o cartão que vira
+        const paperCard = document.createElement('div');
+        paperCard.className = 'paper';
+        
+        const paperInner = document.createElement('div');
+        paperInner.className = 'paper_inner';
+
+        const paperFront = document.createElement('div');
+        paperFront.className = 'paper_front';
+        paperFront.textContent = 'REVELAR AMIGO';
+
+        const paperBack = document.createElement('div');
+        paperBack.className = 'paper_back';
+        paperBack.textContent = par.receiver.toUpperCase();
+
+        paperInner.appendChild(paperFront);
+        paperInner.appendChild(paperBack);
+        paperCard.appendChild(paperInner);
+
+        // Adiciona evento de clique para virar o cartão
+        paperCard.addEventListener('click', () => {
+            paperCard.classList.toggle('flipped');
+        });
+
+        // Adiciona tudo ao item da lista
+        item.appendChild(nome);
+        item.appendChild(arrow);
+        item.appendChild(paperCard);
+        
+        DOM.listaResultados.appendChild(item);
+    });
 }
 
-function flipCard() {
-    const card = DOM.paperCard;
-    card.classList.toggle('flipped');
-}
 
 function resetGame() {
+    document.body.classList.remove('results-active');
     friendList = [];
+    sorteioResultado = [];
     displayList();
-    const card = DOM.paperCard;
-    card.style.display = 'none';
+    
+    // Esconde a tela de resultados e mostra a de configuração
+    DOM.resultadosContainer.style.display = 'none';
+    DOM.setupArea.style.display = 'block';
+    DOM.reiniciarBtn.style.display = 'none';
+    DOM.listaResultados.innerHTML = '';
 }
 
 // Liga os eventos aos botões
 DOM.addNomeBtn.addEventListener('click', addFriend);
-DOM.paperCard.addEventListener('click', flipCard);
 DOM.reiniciarBtn.addEventListener('click', resetGame);
