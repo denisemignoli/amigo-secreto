@@ -3,7 +3,6 @@ const DOM = {
     inputName: document.getElementById('nomeInput'),
     addNomeBtn: document.getElementById('addNomeBtn'),
     friendsList: document.getElementById('listaAmigos'),
-    embaralharBtn: document.getElementById('sortearBtn'),
     paperCard: document.getElementById('paperCard'),
     nameDisplay: document.getElementById('nomeAmigo'),
     reiniciarBtn: document.getElementById('reiniciarBtn')
@@ -58,12 +57,31 @@ function displayList() {
 
         li.appendChild(removeBtn);
         ul.appendChild(li);
+
+        updateSortearBtn();
     }
 }
 
 function removeFriend(index) {
     friendList.splice(index, 1);
     displayList();
+}
+
+function updateSortearBtn() {
+    let sorteioArea = document.getElementById('sorteio-area');
+    sorteioArea.innerHTML = '';
+
+    if (friendList.length >= 2) {
+        let btn = document.createElement('button');
+        btn.className = 'sortearBtn';
+        btn.textContent = 'Sortear';
+        sorteioArea.appendChild(btn);
+
+        setTimeout(() => {
+            btn.classList.add('show');
+        }, 200);
+        btn.addEventListener('click', pickRandomFriend);
+    }
 }
 
 function pickRandomFriend() {
@@ -101,4 +119,3 @@ function resetGame() {
 DOM.addNomeBtn.addEventListener('click', addFriend);
 DOM.paperCard.addEventListener('click', flipCard);
 DOM.reiniciarBtn.addEventListener('click', resetGame);
-DOM.embaralharBtn.addEventListener('click', pickRandomFriend);
