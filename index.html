@@ -13,36 +13,38 @@
 
 <body>
     <header>
-        <h1>Amigo Secreto</h1>
+        <h1>AMIGO SECRETO</h1>
     </header>
+
     <main class="game">
+        <!-- Área de input -->
         <div class="input-area">
-            <input type="text" id="nomeInput" placeholder="Digite o nome do amigo">
-            <button id="addNomeBtn">Adicionar nome</button>
+            <input type="text" id="nomeInput" placeholder="Digite o nome">
+            <button id="addNomeBtn">Adicionar</button>
         </div>
-        <div class="lista-nomes">
-            <ul id="listaAmigos"></ul>
+
+        <!-- Lista de nomes -->
+        <ul id="listaAmigos"></ul>
+
+        <!-- Botão de sorteio -->
+        <div class="sorteio-area">
+            <button id="sortearBtn">Sortear</button>
         </div>
-        <div class="btns">
-            <button id="embaralharBtn">Embaralhar e Sortear</button>
-            <button id="reiniciarBtn">Reiniciar</button>
-        </div>
+
+        <!-- Cartão de resultado -->
         <div class="paper" id="paperCard" style="display:none;">
             <div class="paper_inner" id="paperInner">
                 <div class="paper_front">
                     Clique para ver seu amigo secreto
                 </div>
-                <div class="paper_back" id="nomeAmigo">
-                    <!-- Nome revelado aqui -->
-                </div>
+                <div class="paper_back" id="nomeAmigo"></div>
             </div>
         </div>
-        <div class="instructions">Pressione o botão acima para sortear, depois clique no papel para revelar.</div>
+
+        <!-- Botão reiniciar -->
+        <button id="reiniciarBtn">Reiniciar</button>
     </main>
-    <footer class="footer"> 
-        <p class="footer_text">2025 Amigo Secreto</p>
-        <p class="footer_text">Desenvolvido com ❤️ por Denise Mignoli</p>
-    </footer>
+
     <script src="app.js"></script>
 </body>
 

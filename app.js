@@ -1,12 +1,12 @@
 // Elementos DOM
 const DOM = {
-    inputName: document.querySelector('#nomeInput'),
+    inputName: document.getElementById('nomeInput'),
+    addNomeBtn: document.getElementById('addNomeBtn'),
     friendsList: document.getElementById('listaAmigos'),
+    embaralharBtn: document.getElementById('sortearBtn'),
     paperCard: document.getElementById('paperCard'),
     nameDisplay: document.getElementById('nomeAmigo'),
-    reiniciarBtn: document.getElementById('reiniciarBtn'),
-    addNomeBtn: document.getElementById('addNomeBtn'),
-    embaralharBtn: document.getElementById('embaralharBtn')
+    reiniciarBtn: document.getElementById('reiniciarBtn')
 };
 
 let friendList = [];
@@ -38,6 +38,7 @@ function validateName(name) {
 
 function clearInput() {
     DOM.inputName.value = '';
+    DOM.inputName.focus();
 }
 
 
@@ -47,11 +48,11 @@ function displayList() {
 
     for (let i = 0; i < friendList.length; i++) {
         let li = document.createElement('li');
+        li.textContent = friendList[i].toUpperCase();
         li.className = 'listaAmigos';
-        li.textContent = friendList[i];
 
         let removeBtn = document.createElement('button');
-        removeBtn.textContent = '✖';
+        removeBtn.textContent = 'x';
         removeBtn.className = 'remove-btn';
         removeBtn.onclick = () => removeFriend(i);
 
