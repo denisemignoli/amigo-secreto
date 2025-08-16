@@ -57,9 +57,9 @@ function displayList() {
 
         li.appendChild(removeBtn);
         ul.appendChild(li);
-
-        updateSortearBtn();
     }
+
+    updateSortearBtn();
 }
 
 function removeFriend(index) {
@@ -69,18 +69,25 @@ function removeFriend(index) {
 
 function updateSortearBtn() {
     let sorteioArea = document.getElementById('sorteio-area');
-    sorteioArea.innerHTML = '';
+    let existingBtn = sorteioArea.querySelector('.sortearBtn');
 
     if (friendList.length >= 2) {
-        let btn = document.createElement('button');
-        btn.className = 'sortearBtn';
-        btn.textContent = 'Sortear';
-        sorteioArea.appendChild(btn);
+        if (!existingBtn) {
+            let btn = document.createElement('button');
+            btn.className = 'sortearBtn';
+            btn.textContent = 'Sortear';
+            sorteioArea.appendChild(btn);
 
-        setTimeout(() => {
-            btn.classList.add('show');
-        }, 200);
-        btn.addEventListener('click', pickRandomFriend);
+            setTimeout(() => {
+                btn.classList.add('show');
+            }, 50);
+
+            btn.addEventListener('click', pickRandomFriend);
+        }
+    } else {
+        if (existingBtn) {
+            existingBtn.remove();
+        }
     }
 }
 
