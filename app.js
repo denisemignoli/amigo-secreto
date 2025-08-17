@@ -101,7 +101,7 @@ function realizarSorteio() {
         const receiver = shuffledFriends[(i + 1) % shuffledFriends.length];
         sorteioResultado.push({ giver, receiver });
     }
-    
+
     displayResults();
 }
 
@@ -128,7 +128,7 @@ function displayResults() {
         // Cria o cartão que vira
         const paperCard = document.createElement('div');
         paperCard.className = 'paper';
-        
+
         const paperInner = document.createElement('div');
         paperInner.className = 'paper_inner';
 
@@ -153,7 +153,7 @@ function displayResults() {
         item.appendChild(nome);
         item.appendChild(arrow);
         item.appendChild(paperCard);
-        
+
         DOM.listaResultados.appendChild(item);
     });
 }
@@ -164,7 +164,7 @@ function resetGame() {
     friendList = [];
     sorteioResultado = [];
     displayList();
-    
+
     // Esconde a tela de resultados e mostra a de configuração
     DOM.resultadosContainer.style.display = 'none';
     DOM.setupArea.style.display = 'block';

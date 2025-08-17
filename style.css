@@ -7,6 +7,8 @@
     --cor-destaque: #FF4B00;
     --cor-texto: #696464;
     --cor-hover: #FFFFFF;
+    --cor-card: #696464;
+    --cor-card-alpha: rgba(105, 100, 100, 0.1);
     --fonte-principal: "Josefin Sans", sans-serif;
     --fonte-secundária: "Inter", sans-serif;
 }
@@ -68,12 +70,6 @@ body.results-active h1 {
     color: var(--cor-texto);
 }
 
-@media(max-width: 500px) {
-    #nomeInput{
-        width: 12.875rem;
-    }
-}
-
 #addNomeBtn {
     font-family: var(--fonte-secundária);
     font-size: 0.875rem;
@@ -88,7 +84,7 @@ body.results-active h1 {
     transition: background-color 0.2s;
 }
 
-#addNomeBtn:hover{
+#addNomeBtn:hover {
     background-color: var(--cor-destaque);
     color: var(--cor-bg);
 }
@@ -155,7 +151,7 @@ body.results-active h1 {
     transition: opacity 1.2s ease, transform 1.2s ease, background-color 0.2s;
 }
 
-.sortearBtn:hover{
+.sortearBtn:hover {
     background-color: var(--cor-hover);
     color: var(--cor-destaque);
 }
@@ -166,26 +162,6 @@ body.results-active h1 {
 }
 
 /* Area de Resultados */
-#reiniciarBtn {
-    display: none;
-    padding: 15px 18px;
-    background-color: transparent;
-    border: 1px solid var(--cor-destaque);
-    border-radius: 8px;
-    font-size: 0.875rem;
-    color: var(--cor-destaque);
-    font-weight: bold;
-    transition: all 0.3s;
-    cursor: pointer;
-    width: 250px;
-    margin-top: 47px;
-}
-
-#reiniciarBtn:hover {
-    background: var(--cor-destaque);
-    color: var(--cor-bg);
-}
-
 #resultados-container {
     width: 100%;
     text-align: center;
@@ -228,7 +204,7 @@ body.results-active h1 {
 
 .paper {
     flex-basis: 45%;
-    height: 60px;
+    height: 45px;
     perspective: 800px;
     cursor: pointer;
 }
@@ -251,52 +227,69 @@ body.results-active h1 {
 .paper_front,
 .paper_back {
     position: absolute;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    user-select: none;
+    border: 1px solid var(--cor-card-alpha);
+    border-radius: 8px;
+    font-family: var(--fonte-secundária);
+    font-size: 0.8125rem;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
-    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.9rem;
-    padding: 10px;
-    box-sizing: border-box;
-    user-select: none;
-    border: 1px solid var(--cor-destaque);
 }
 
 .paper_front {
-    background: var(--cor-bg);
-    color: var(--cor-destaque);
-    font-weight: bold;
+    background-color: var(--cor-card-alpha);
+    color: var(--cor-texto);
+    font-weight: 500;
 }
 
 .paper_back {
     background: var(--cor-destaque);
     color: var(--cor-bg);
     transform: rotateY(180deg);
-    font-style: italic;
     font-weight: bold;
+    padding: 15px 66px;
 }
 
-@media (max-width: 768px) {
+#reiniciarBtn {
+    font-size: 0.875rem;
+    font-weight: bold;
+    display: none;
+    padding: 18px 24px;
+    background-color: transparent;
+    border: 1px solid var(--cor-destaque);
+    border-radius: 8px;
+    border-width: 1px;
+    color: var(--cor-destaque);
+    transition: all 0.3s;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 57px;
+    max-width: 300px;
+}
+
+#reiniciarBtn:hover {
+    background: var(--cor-destaque);
+    color: var(--cor-bg);
+}
+
+@media (max-width: 500px) {
     .game {
-        width: 90%;
+        width: 80%;
+    }
+
+    #nomeInput {
+        width: 12.875rem;
     }
 
     .resultado-item {
-        flex-direction: column;
         gap: 15px;
         border-bottom: 1px solid var(--cor-bg-secundaria);
         padding-bottom: 20px;
-    }
-
-    .giver-name {
-        text-align: center;
-    }
-
-    .arrow {
-        transform: rotate(90deg);
     }
 
     .paper {
