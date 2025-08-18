@@ -1,234 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
 :root {
-    --color-primary: #34495E;
-    --color-secondary: #FDEBD0;
-    --color-tertiary: #C4C4C4;
-    --color-button: #fe652b;
-    --color-button-hover: #e55720;
-    --color-text: #444444;
-    --color-white: #FFFFFF;
+    --cor-bg: #FFFFFF;
+    --cor-bg-secundaria: #F5F5F5;
+    --cor-contorno: #ADADAD;
+    --cor-destaque: #FF4B00;
+    --cor-texto: #696464;
+    --cor-hover: #FFFFFF;
+    --cor-card: #696464;
+    --cor-card-alpha: rgba(105, 100, 100, 0.1);
+    --fonte-principal: "Josefin Sans", sans-serif;
+    --fonte-secundária: "Inter", sans-serif;
 }
 
-/* Estilos gerais */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body.dark-mode {
+    --cor-bg: #000000;
+    --cor-bg-secundaria: #1D2123; 
+    --cor-contorno: #575757;
+    --cor-texto: #8EA0A9;
+    --cor-hover: #000000;
+    --cor-card-alpha: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode #addNomeBtn:hover {
+    color: #FFFFFF;
+}
+
+body.dark-mode .chipAmigo{
+    background: var(--cor-bg-secundaria);
+    color: var(--cor-texto);
 }
 
 body {
-    height: 100vh;
-    background-color: var(--color-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-}
-
-/* Banner */
-.header-banner {
-    flex: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 0 0;
-}
-
-/* Seção de entrada */
-.input-section {
-    flex: 60%;
-    background-color: var(--color-secondary);
-    border: 1px solid #000;
-    border-radius: 64px 64px 0 0;
+    background: var(--cor-bg);
+    color: var(--cor-texto);
+    font-family: var(--fonte-principal);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    width: 100%;
+    transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* Títulos */
-.main-title {
-    font-size: 48px;
-    font-family: "Merriweather", serif;
-    font-weight: 900;
-    font-style: italic;
-    color: var(--color-white);
+body, input, button, .chipAmigo, .paper_front, .paper_back {
+    transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
 }
 
-.section-title {
-    font-family: "Inter", serif;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin: 10px 0;
-    text-align: center;
+/* Header */
+h1 {
+    font-family: var(--fonte-principal);
+    font-size: 2.10rem;
+    font-weight: 200;
+    font-style: normal;
+    margin-top: 81px;
+    margin-bottom: 84px;
+    background: linear-gradient(to right, #372C28, #FFFFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    transition: margin-bottom 0.4s ease;
 }
 
-/* Contêineres de entrada e botão */
-.input-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
+body.results-active h1 {
+    margin-bottom: 22px;
 }
 
-.input-name {
-    width: 100%;
-    padding: 10px 20px;
-    border: 1px solid #000;
-    border-radius: 25px 0 0 25px;
-    font-size: 16px;
-}
-
-.button-container {
-    width: 300px;
-    justify-content: center;
-}
-
-/* Estilos de entrada de texto */
-.input-title {
-    flex: 1;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 2px solid #333;
-    border-right: none;
-    border-radius: 25px 0 0 25px;
-    font-family: "Merriweather", serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilos de botão */
-button {
-    padding: 15px 30px;
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    border: 2px solid #000;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+#themeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    background: transparent;
+    border: 1px solid var(--cor-contorno);
+    border-radius: 8px;
+    padding: 6px 12px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.button-add {
-    border: none;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border-radius: 0 25px 25px 0;
+#themeToggle:hover {
+    background: var(--cor-destaque);
+    color: var(--cor-bg);
 }
 
-.button-add:hover {
-    background-color: #000000dc;
-}
-
-/* Botão de sortear título */
-.button-draw {
+.game {
+    width: 38%;
+    margin: 0 auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: 10px 40px;
-    color: var(--color-white);
-    background-color: var(--color-button);
-    font-size: 16px;
-    border: none;
 }
 
-.button-draw img {
-    margin-right: 40px;
+/* Area de input */
+.input-area {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 90%;
+    margin: 0 auto;
 }
 
-.button-draw:hover {
-    background-color: var(--color-button-hover);
+#nomeInput {
+    font-family: var(--fonte-secundária);
+    font-size: 0.875rem;
+    padding: 18px 15px;
+    background-color: var(--cor-bg-secundaria);
+    border-color: var(--cor-contorno);
+    border-width: 0.5px;
+    border-radius: 8px;
+    width: 19.43rem;
+    color: var(--cor-texto);
 }
 
-/* Estilo para o <ul> da lista de amigos */
-.name-list {
+#addNomeBtn {
+    font-family: var(--fonte-secundária);
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 18px 15px;
+    background-color: var(--cor-bg);
+    border-color: var(--cor-destaque);
+    border-width: 1px;
+    border-radius: 8px;
+    color: var(--cor-destaque);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#addNomeBtn:hover {
+    background-color: var(--cor-destaque);
+    color: var(--cor-bg);
+}
+
+.error-message {
+    font-family: var(--fonte-secundária);
+    font-size: 0.8rem;
+    color: var(--cor-destaque);
+    text-align: left;
+    width: 90%;
+    margin: 8px auto;
+}
+
+/* Lista de amigos */
+#listaAmigos {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 16px;
     justify-content: center;
-    padding: 10px 20px;
+    list-style: none;
+    padding: 0;
+    margin: 70px auto;
 }
 
-/* Cada nome como uma "tag" */
-.friend-item {
+.chipAmigo {
+    font-family: var(--fonte-secundária);
+    font-size: 0.81rem;
+    padding: 15px 21px;
+    background: linear-gradient(to right, #EDEDED, #F8F8F8);
+    border-radius: 8px;
+    color: var(--cor-texto);
     display: flex;
     align-items: center;
-    background-color: var(--color-button);
-    border-radius: 50px;
-    padding: 6px 12px;
-    font-size: 16px;
-    font-family: "Inter", sans-serif;
-    color: #FFFFFF;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s, color 0.2s;
+    gap: 8px;
 }
 
-.friend-item:hover {
-    background-color: var(--color-white);
-    color: #000000;
-}
-
-.friend-item span {
-    margin-right: 8px;
-}
-
-/* Botão de remover */
 .remove-btn {
+    font-family: var(--fonte-secundária);
+    font-size: 0.81rem;
+    font-weight: bold;
     all: unset;
-    color: var(--color-primary);
-    font-size: 16px;
-    margin-left: 6px;
+    color: #696464;
     cursor: pointer;
     transition: transform 0.2s, color 0.2s;
-    line-height: 1;
 }
 
 .remove-btn:hover {
-    color: #e50000;
-    transform: scale(1.2);
+    color: var(--cor-destaque);
+    transform: scale(1.4);
 }
 
-/* Resultado do sorteio */
-.section-result {
-    font-family: "Inter", serif;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin: 30px 0px 10px;
-    text-align: center;
+/* Area de sorteio */
+#sorteio-area {
+    width: 35%;
+    margin: auto;
+    margin-bottom: 70px;
 }
 
-ul {
-    list-style-type: none;
-    color: var(--color-text);
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    margin: 20px 0;
-}
-
-.result-list {
-    margin-top: 15px;
-    color: var(--color-white);
-    font-size: 22px;
+.sortearBtn {
+    font-size: 0.875rem;
     font-weight: bold;
+    padding: 18px 24px;
+    width: 100%;
+    color: #FFFFFF;
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+    border-width: 1px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: auto;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1.2s ease, transform 1.2s ease, background-color 0.2s;
+}
+
+.sortearBtn:hover {
+    background-color: var(--cor-hover);
+    color: var(--cor-destaque);
+}
+
+.sortearBtn.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Area de Resultados */
+.hidden { display: none; }
+
+#resultados-container {
+    width: 100%;
     text-align: center;
 }
 
-.friend-selected{
+#resultados-container h2 {
+    font-family: var(--fonte-secundária);
+    font-size: 1.125rem;
+    font-weight: 300;
+    margin-top: 0px;
+    margin-bottom: 57px;
+    color: var(--cor-texto);
+}
+
+#lista-resultados {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.resultado-item {
     display: flex;
     align-items: center;
-    background-color: #2f8741;
-    border-radius: 50px;
-    padding: 6px 24px;
-    font-size: 16px;
-    font-family: "Inter", sans-serif;
-    color: #FFFFFF;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s, color 0.2s;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.giver-name {
+    font-family: var(--fonte-secundária);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    flex-basis: 40%;
+    text-align: left;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: var(--cor-contorno);
+}
+
+.paper {
+    flex-basis: 45%;
+    height: 45px;
+    perspective: 800px;
+    cursor: pointer;
+}
+
+.paper_inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.paper.flipped .paper_inner {
+    transform: rotateY(180deg);
+}
+
+.paper_front,
+.paper_back {
+    position: absolute;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    user-select: none;
+    border: 1px solid var(--cor-card-alpha);
+    border-radius: 8px;
+    font-family: var(--fonte-secundária);
+    font-size: 0.8125rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paper_front {
+    background-color: var(--cor-card-alpha);
+    color: var(--cor-texto);
+    font-weight: 500;
+}
+
+.paper_back {
+    background: var(--cor-destaque);
+    color: var(--cor-bg);
+    transform: rotateY(180deg);
+    font-weight: bold;
+    padding: 15px 66px;
+}
+
+#reiniciarBtn {
+    font-size: 0.875rem;
+    font-weight: bold;
+    display: none;
+    padding: 18px 24px;
+    background-color: transparent;
+    border: 1px solid var(--cor-destaque);
+    border-radius: 8px;
+    border-width: 1px;
+    color: var(--cor-destaque);
+    transition: all 0.3s;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 57px;
+    max-width: 300px;
+}
+
+#reiniciarBtn:hover {
+    background: var(--cor-destaque);
+    color: var(--cor-bg);
+}
+
+@media (max-width: 500px) {
+    .game {
+        width: 80%;
+    }
+
+    #nomeInput {
+        width: 12.875rem;
+    }
+
+    .resultado-item {
+        gap: 15px;
+        border-bottom: 1px solid var(--cor-bg-secundaria);
+        padding-bottom: 20px;
+    }
+
+    .paper {
+        width: 80%;
+    }
 }
