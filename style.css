@@ -213,6 +213,8 @@ body.results-active h1 {
 }
 
 /* Area de Resultados */
+.hidden { display: none; }
+
 #resultados-container {
     width: 100%;
     text-align: center;

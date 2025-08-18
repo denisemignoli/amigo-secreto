@@ -164,7 +164,6 @@ function displayResults() {
     });
 }
 
-
 function resetGame() {
     document.body.classList.remove('results-active');
     friendList = [];
@@ -189,8 +188,7 @@ DOM.inputName.addEventListener('keydown', (event) => {
     }
 });
 
-
-//tema dark
+// Tema dark
 const themeBtn = document.getElementById('themeToggle');
 
 themeBtn.addEventListener('click', () => {
