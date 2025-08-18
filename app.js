@@ -25,17 +25,23 @@ function addFriend() {
 
 function validateName(name) {
     if (!name) {
-        alert('Por favor, informe um nome válido!');
+        showError('Por favor, informe um nome válido!');
         throw new Error('Nome inválido.');
     }
     if (name.length < 3) {
-        alert('O nome deve ter pelo menos 3 caracteres!');
+        showError('O nome deve ter pelo menos 3 caracteres!');
         throw new Error('Nome muito curto.');
     }
     if (friendList.includes(name)) {
-        alert('Este nome já foi adicionado!');
+        showError('Este nome já foi adicionado!');
         throw new Error('Nome duplicado.');
     }
+    showError('');
+}
+
+function showError(msg) {
+    const errorEl = document.getElementById('errorMessage');
+    errorEl.textContent = msg || '';
 }
 
 function clearInput() {

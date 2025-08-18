@@ -89,6 +89,15 @@ body.results-active h1 {
     color: var(--cor-bg);
 }
 
+.error-message {
+    font-family: var(--fonte-secundária);
+    font-size: 0.8rem;
+    color: red;
+    text-align: left;
+    width: 90%;
+    margin: 8px auto;
+}
+
 /* Lista de amigos */
 #listaAmigos {
     display: flex;
