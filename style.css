@@ -13,15 +13,39 @@
     --fonte-secundária: "Inter", sans-serif;
 }
 
+body.dark-mode {
+    --cor-bg: #000000;
+    --cor-bg-secundaria: #1D2123; 
+    --cor-contorno: #575757;
+    --cor-texto: #8EA0A9;
+    --cor-hover: #000000;
+    --cor-card-alpha: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode #addNomeBtn:hover {
+    color: #FFFFFF;
+}
+
+body.dark-mode .chipAmigo{
+    background: var(--cor-bg-secundaria);
+    color: var(--cor-texto);
+}
+
 body {
     background: var(--cor-bg);
-    font-family: var(--fonte-principal);
     color: var(--cor-texto);
+    font-family: var(--fonte-principal);
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: background 0.5s ease, color 0.5s ease;
 }
 
+body, input, button, .chipAmigo, .paper_front, .paper_back {
+    transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+/* Header */
 h1 {
     font-family: var(--fonte-principal);
     font-size: 2.10rem;
@@ -39,6 +63,24 @@ h1 {
 
 body.results-active h1 {
     margin-bottom: 22px;
+}
+
+#themeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    background: transparent;
+    border: 1px solid var(--cor-contorno);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#themeToggle:hover {
+    background: var(--cor-destaque);
+    color: var(--cor-bg);
 }
 
 .game {
@@ -92,7 +134,7 @@ body.results-active h1 {
 .error-message {
     font-family: var(--fonte-secundária);
     font-size: 0.8rem;
-    color: red;
+    color: var(--cor-destaque);
     text-align: left;
     width: 90%;
     margin: 8px auto;
@@ -148,7 +190,7 @@ body.results-active h1 {
     font-weight: bold;
     padding: 18px 24px;
     width: 100%;
-    color: var(--cor-bg);
+    color: #FFFFFF;
     background-color: var(--cor-destaque);
     border-color: var(--cor-destaque);
     border-width: 1px;
