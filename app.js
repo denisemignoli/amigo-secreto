@@ -181,3 +181,10 @@ function resetGame() {
 // Liga os eventos aos botões
 DOM.addNomeBtn.addEventListener('click', addFriend);
 DOM.reiniciarBtn.addEventListener('click', resetGame);
+
+// Permitir adicionar amigo com tecla Enter
+DOM.inputName.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        addFriend();
+    }
+});
